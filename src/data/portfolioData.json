@@ -1,0 +1,201 @@
+{
+  "hero": {
+    "headline": "Your business deserves visibility, trust, and a digital experience that converts.",
+    "subheadline": "Rudra drives high-converting digital marketing and manages brand content visibility, while Narayan builds robust full-stack digital products. Together, they turn your business ideas into reality with seamless strategy and code execution.",
+    "ctaText": "Start Your Project",
+    "ctaLink": "#contact"
+  },
+  "services": {
+    "marketing": {
+      "title": "Growth, Content & Visibility",
+      "description": "Improving business visibility, designing acquisition funnels, and managing content strategy.",
+      "items": [
+        "SEO, local visibility & indexing audits",
+        "Social media & conversion content planning",
+        "Promotional videos & campaign planning",
+        "Website & content management support",
+        "Lead generation & ad optimization",
+        "Audience profiling & brand positioning"
+      ]
+    },
+    "development": {
+      "title": "Full Stack Engineering",
+      "description": "Building scalable, high-performance web products, secure APIs, and flawless frontend interfaces.",
+      "items": [
+        "Responsive, modern React applications",
+        "Scalable Node & database architectures",
+        "High-converting landing pages",
+        "Advanced web app UI/UX implementation",
+        "API designs & third-party integrations",
+        "Lighthouse speed & performance tuning"
+      ]
+    }
+  },
+  "whyUs": [
+    "Integrated Growth + Full Stack development strategy",
+    "Direct communication with Rudra and Narayan",
+    "Aesthetic modern execution",
+    "Lighthouse-optimized pages (95+ score)",
+    "Result-oriented campaign models",
+    "Reliable, high-quality deliverables"
+  ],
+  "team": [
+    {
+      "name": "Rudra",
+      "title": "Digital Growth Specialist",
+      "role": "Marketing & Content Partner",
+      "expertise": "Visibility & Content Management",
+      "intro": "I specialize in digital marketing, brand visibility, and content strategy. I help businesses capture organic search demand, design high-impact promotional creatives, and manage their online content to establish digital authority.",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      "strengths": [
+        "Content Strategy & SEO audits",
+        "High-conversion PPC & Ads management",
+        "Promotional videos & creative graphics",
+        "Website & blog content administration"
+      ],
+      "signature": "emerald"
+    },
+    {
+      "name": "Narayan",
+      "title": "Full Stack Developer",
+      "role": "Technology Partner",
+      "expertise": "Scalable Digital Products",
+      "intro": "I build robust, secure, and modern digital applications. From setting up fast servers and database schemas to building micro-interactive, responsive React UIs, I bring complex product concepts to life.",
+      "avatar": "/narayan.jpg",
+      "strengths": [
+        "Scalable database & backend logic",
+        "Premium micro-interactive frontend UI",
+        "High-performance landing pages",
+        "Secure API integrations & speed optimization"
+      ],
+      "signature": "cyan"
+    }
+  ],
+  "work": {
+    "marketing": [
+      {
+        "title": "Lead-Gen Content Blueprint",
+        "type": "Ad Campaign",
+        "description": "Structured organic search and local indexing strategy paired with paid search funnels, netting organic calls.",
+        "metric": "+220% Leads",
+        "subkpi": "CTR: 4.8%",
+        "deliverables": [
+          "Targeted local SEO indexing setup",
+          "Google & Meta keyword targeting",
+          "Conversion copy templates"
+        ]
+      },
+      {
+        "title": "Brand Promo Campaign",
+        "type": "Creative Video",
+        "description": "Produced custom promotional short videos and content graphics, driving social engagement.",
+        "metric": "3x Reach Growth",
+        "subkpi": "+140% Shares",
+        "deliverables": [
+          "Promotional video planning",
+          "Custom visual content layouts",
+          "Social media scheduling strategy"
+        ]
+      },
+      {
+        "title": "Blog & SEO Management",
+        "type": "Content Management",
+        "description": "Managed end-to-end CMS updates, semantic SEO formatting, and core article optimization for ranking keywords.",
+        "metric": "+180% Organic Clicks",
+        "subkpi": "Avg Rank: #4.2",
+        "deliverables": [
+          "Keyword planning & content briefs",
+          "WordPress/CMS publishing & metadata",
+          "High-quality content marketing"
+        ]
+      }
+    ],
+    "development": [
+      {
+        "title": "SaaS Platform Dashboard",
+        "type": "Full Stack App",
+        "description": "Engineered a secure Node/Express backend paired with a high-fidelity React analytics screen showing real-time logs.",
+        "metric": "Sub-sec Load (LCP)",
+        "subkpi": "100% Core Web Vitals",
+        "deliverables": [
+          "Scalable Mongo/Express routing logic",
+          "Micro-interactive charts & panels",
+          "Stripe & Auth integration"
+        ]
+      },
+      {
+        "title": "Premium Agency Landing Page",
+        "type": "Landing Page",
+        "description": "Designed and coded a micro-interactive desktop/mobile storefront with spring-loaded scroll triggers.",
+        "metric": "98 Lighthouse Score",
+        "subkpi": "+45% Conversion CTR",
+        "deliverables": [
+          "Tailwind CSS responsive alignment",
+          "Smooth Framer Motion interactions",
+          "Asset caching & lazy loading"
+        ]
+      },
+      {
+        "title": "Custom API Integrations Hub",
+        "type": "Backend / UI",
+        "description": "Structured a server-to-server webhook router with active debug consoles and dashboard statistics panels.",
+        "metric": "100k API Requests/Day",
+        "subkpi": "99.99% Uptime SLA",
+        "deliverables": [
+          "Secure OAuth2 authentication setup",
+          "Real-time node logger integration",
+          "Error-handling & retry triggers"
+        ]
+      }
+    ]
+  },
+  "process": [
+    {
+      "step": "01",
+      "title": "Discovery & Footprint Audit",
+      "description": "We analyze your business goals, target audience, competitive landscape, and perform a deep SEO and technical review.",
+      "alexRole": "Audits current ranking & PPC potential",
+      "jordanRole": "Inspects tech stack & LCP load speeds"
+    },
+    {
+      "step": "02",
+      "title": "The Unified Strategy",
+      "description": "We build a collaborative roadmap where your marketing campaigns and web architecture are completely aligned.",
+      "alexRole": "Maps high-conversion customer funnels",
+      "jordanRole": "Plans clean UI systems & optimal stack"
+    },
+    {
+      "step": "03",
+      "title": "Slick Engineering & Copy",
+      "description": "We craft modern, visually beautiful page structures, high-impact copywriting, and optimized components.",
+      "alexRole": "Creates targeted ads & content blueprint",
+      "jordanRole": "Builds super-fast React storefronts"
+    },
+    {
+      "step": "04",
+      "title": "Smooth Launch & Setup",
+      "description": "Your digital platform goes live on premium edge CDNs with active analytical mapping and tag deployments.",
+      "alexRole": "Configures search console & tracking pixel",
+      "jordanRole": "Ensures sub-second TTFB & SEO readiness"
+    },
+    {
+      "step": "05",
+      "title": "Optimization & Growth",
+      "description": "We continuously analyze user behavior, scale ad budgets, optimize key pages, and roll out feature updates.",
+      "alexRole": "Optimizes conversions & scales keywords",
+      "jordanRole": "Monitors Web Vitals & ships improvements"
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "GrowthDev delivered a flawless, ultra-fast platform and paired it with a local SEO strategy that brought us qualified leads within weeks.",
+      "author": "Marcus V.",
+      "company": "Summit Partners"
+    }
+  ],
+  "contact": {
+    "heading": "Ready to scale your organic presence or build a world-class digital product?",
+    "email": "hello@chandrabud.studio",
+    "whatsapp": "+1234567890"
+  }
+}
