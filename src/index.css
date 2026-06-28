@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+/* Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
+
+/* Core Document styling */
+body {
+  @apply bg-[#050505] text-[#ededed] antialiased font-sans selection:bg-emerald-500/30 selection:text-white;
+  overflow-x: hidden;
+}
+
+/* Smooth HTML scroll behavior with offset for bottom bar */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-bottom: 80px;
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  @apply bg-white/[0.02] backdrop-blur-xl border border-white/5 shadow-2xl transition-all duration-300;
+}
+
+.glass-card {
+  @apply bg-[#0b0b0b]/60 backdrop-blur-xl border border-white/5 shadow-2xl transition-all duration-500;
+}
+
+/* Glowing Backdrops */
+.glow-sphere {
+  @apply absolute rounded-full opacity-35 filter blur-[150px] pointer-events-none transition-all duration-1000;
+}
+
+.glow-emerald {
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.4) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+.glow-cyan {
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.4) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+.glow-combined {
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.3) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+.glow-gold {
+  background: radial-gradient(circle, rgba(234, 179, 8, 0.35) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+/* Custom Text Gradients */
+.gradient-text-emerald {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-500;
+}
+
+.gradient-text-cyan {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-sky-300 to-cyan-500;
+}
+
+.gradient-text-gold {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-500;
+}
+
+.gradient-text-combined {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400;
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400;
+}
+
+/* Zig-zag divider custom border */
+.zigzag-divider {
+  height: 12px;
+  background-image: linear-gradient(135deg, rgba(255,255,255,0.08) 25%, transparent 25%), 
+                    linear-gradient(225deg, rgba(255,255,255,0.08) 25%, transparent 25%);
+  background-position: 0 0;
+  background-size: 16px 16px;
+  width: 100%;
+}
+
+.zigzag-divider-glow {
+  height: 12px;
+  background-image: linear-gradient(135deg, rgba(52,211,153,0.15) 25%, transparent 25%), 
+                    linear-gradient(225deg, rgba(34,211,238,0.15) 25%, transparent 25%);
+  background-position: 0 0;
+  background-size: 16px 16px;
+  width: 100%;
+}
+
+/* Micro-Animations & Floating effects */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(2deg); }
+}
+
+@keyframes float-reverse {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(12px) rotate(-2deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.25; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(1.15); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: float-reverse 7s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 8s ease-in-out infinite;
+}
+
+/* Border Glow utility on hover */
+.border-glow-hover {
+  @apply hover:border-white/15 hover:shadow-[0_0_30px_rgba(255,255,255,0.02)] transition-all duration-500;
+}
+
+.border-glow-emerald {
+  @apply hover:border-emerald-500/20 hover:shadow-[0_0_40px_rgba(16,185,129,0.08)] transition-all duration-500;
+}
+
+.border-glow-cyan {
+  @apply hover:border-cyan-500/20 hover:shadow-[0_0_40px_rgba(6,182,212,0.08)] transition-all duration-500;
+}
+
+.border-glow-gold {
+  @apply hover:border-yellow-500/20 hover:shadow-[0_0_40px_rgba(234,179,8,0.08)] transition-all duration-500;
+}
+
+/* Elegant badges */
+.badge-emerald {
+  @apply bg-emerald-500/10 border border-emerald-500/20 text-emerald-400;
+}
+
+.badge-cyan {
+  @apply bg-cyan-500/10 border border-cyan-500/20 text-cyan-400;
+}
+
+.badge-gold {
+  @apply bg-yellow-500/10 border border-yellow-500/20 text-yellow-400;
+}
+

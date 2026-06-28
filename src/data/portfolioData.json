@@ -1,0 +1,140 @@
+{
+  "hero": {
+    "headline": "Building High-Converting Digital Presence & Local Growth Funnels",
+    "subheadline": "We drive organic search visibility, manage local indexing, and design premium advertising funnels to turn clicks into conversions. Skip the agency bloat and grow your brand directly.",
+    "ctaText": "Get a Free Audit",
+    "ctaLink": "#contact"
+  },
+  "about": {
+    "bio": "Chandrabud Studio is a high-performance digital marketing and local SEO specialist team. We help businesses optimize local keyword rankings, audit GMB profiles, and run search campaigns that generate real calls and organic leads.",
+    "experience": "10+ Years Combo",
+    "projects": "150+ Shipped",
+    "reviewsCount": "48 Google Reviews"
+  },
+  "services": {
+    "marketing": {
+      "title": "Local SEO & Visibility Audits",
+      "description": "Improving business visibility on local search results and optimization of indexing rules.",
+      "items": [
+        "SEO, GMB local indexing & audits",
+        "Social media & conversion content planning",
+        "Promotional campaigns & tracking",
+        "Website & content management support",
+        "Local lead generation & ad optimization",
+        "Audience profiling & local positioning"
+      ]
+    }
+  },
+  "showcase": [
+    {
+      "title": "Google Local SEO & Indexing Audit",
+      "image": "https://images.unsplash.com/photo-1571721795195-a2ca2d3370a9?auto=format&fit=crop&w=800&q=80",
+      "desc": "Keyword ranking optimizations, index setup checks, and organic calls lead-generation blueprint."
+    },
+    {
+      "title": "Keyword Strategy & Audit Report",
+      "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80",
+      "desc": "High-intent local keywords strategy mapping and search volume audits."
+    },
+    {
+      "title": "Conversion Ads & Campaign Banner Designs",
+      "image": "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=80",
+      "desc": "Local search keyword targeting ads, CTR optimizations, and landing pages setups."
+    },
+    {
+      "title": "Organic Content Indexing & GMB Admin",
+      "image": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80",
+      "desc": "Google Business Profile management, local mapping ranking, and semantic content optimizations."
+    }
+  ],
+  "instagramVideos": [
+    {
+      "title": "Brand Visibility Portfolio",
+      "id": "DZHYuHeE5aO",
+      "link": "https://www.instagram.com/p/DZHYuHeE5aO/?igsh=MWxjeDY1amw2Y2V0eg==",
+      "thumbnail": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=600&q=80",
+      "tag": "Featured Video"
+    },
+    {
+      "title": "Organic Local Lead Growth Hacks",
+      "id": "DY7GmyRHW-r",
+      "link": "https://www.instagram.com/reel/DY7GmyRHW-r/?igsh=b3JqYm80cW1xdm1j",
+      "thumbnail": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80",
+      "tag": "Local SEO"
+    },
+    {
+      "title": "Google Business Indexing Tips",
+      "id": "DYoimfGT3DV",
+      "link": "https://www.instagram.com/reel/DYoimfGT3DV/?igsh=MWpiNWxpdjF2Z2o2YQ==",
+      "thumbnail": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80",
+      "tag": "GBP Guide"
+    },
+    {
+      "title": "High-Converting Ads Blueprint",
+      "id": "DYHPXfvtB7g",
+      "link": "https://www.instagram.com/reel/DYHPXfvtB7g/?igsh=MWN2NzB3cG52ODlwZQ==",
+      "thumbnail": "https://images.unsplash.com/photo-1533750516457-a7f992034fec?auto=format&fit=crop&w=600&q=80",
+      "tag": "Ad Blueprint"
+    },
+    {
+      "title": "Audience Profiling Strategy",
+      "id": "DZmdB4ORX4c",
+      "link": "https://www.instagram.com/reel/DZmdB4ORX4c/?igsh=MXd1emQ4NHYydGg2eA==",
+      "thumbnail": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=600&q=80",
+      "tag": "Growth Strategy"
+    },
+    {
+      "title": "Content Formatting & Local Rankings",
+      "id": "DXMA6A2Er-P",
+      "link": "https://www.instagram.com/reel/DXMA6A2Er-P/?igsh=MXAybm1nMGRpZTFudA==",
+      "thumbnail": "https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=600&q=80",
+      "tag": "SEO Tip"
+    },
+    {
+      "title": "AI Tools for Marketing & Growth",
+      "id": "DVc1FDmk41w",
+      "link": "https://www.instagram.com/reel/DVc1FDmk41w/?igsh=c3MzdzliMDMzamhz",
+      "thumbnail": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=600&q=80",
+      "tag": "AI Marketing"
+    },
+    {
+      "title": "Semantic Keywords Optimization",
+      "id": "DWW5cAhzdkp",
+      "link": "https://www.instagram.com/reel/DWW5cAhzdkp/?igsh=djdkb2V5cDN0MDlu",
+      "thumbnail": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80",
+      "tag": "Optimization"
+    },
+    {
+      "title": "Customer Trust & Indexing Audits",
+      "id": "DSP0nEPE8rQ",
+      "link": "https://www.instagram.com/reel/DSP0nEPE8rQ/?igsh=MWo0enFwcmVhZTJvbQ==",
+      "thumbnail": "https://images.unsplash.com/photo-1552581230-c0137413876d?auto=format&fit=crop&w=600&q=80",
+      "tag": "Case Study"
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "Highly professional and easily reachable team who would always be ready to hear you out and put your thoughts into their designs. We are glad that we chose them as developers and growth partners for our most significant milestone. Thank you, once again, for your kind words.",
+      "author": "Akhilesh Sharma",
+      "company": "Customer"
+    },
+    {
+      "quote": "Chandrabud Studio delivered a flawless, ultra-fast platform and paired it with a local SEO strategy that brought us qualified leads within weeks.",
+      "author": "Marcus V.",
+      "company": "Summit Partners"
+    },
+    {
+      "quote": "Their GMB indexing strategy and organic targeting copy gave us a 3x lead increase in our local construction services directory.",
+      "author": "Neha Patra",
+      "company": "Infra Build Group"
+    }
+  ],
+  "contact": {
+    "heading": "Ready to scale your organic presence or build a world-class digital product?",
+    "address": "Bharati Tower, Airport Square, Near HDFC Bank, Bhubaneswar, Odisha, India",
+    "phone": "+91 9556292111",
+    "email": "sconmaninfraputltd9@gmail.com",
+    "whatsapp": "+919556292111",
+    "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3742.923838384218!2d85.81180477583626!3d20.262002113645396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a1907de38555555%3A0xb3debb73111b7d52!2sAirport%20Square%2C%20Bhubaneswar%2C%20Odisha!5e0!3m2!1sen!2sin!4v1719580000000!5m2!1sen!2sin"
+  }
+}
