@@ -29,6 +29,43 @@ const Instagram = ({ size = 16, className = "" }) => (
   </svg>
 );
 
+// Local Facebook Icon to prevent package resolution errors
+const Facebook = ({ size = 16, className = "" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+  </svg>
+);
+
+// Local Clock Icon to prevent package resolution errors
+const Clock = ({ size = 16, className = "" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="12 6 12 12 16 14" />
+  </svg>
+);
+
 const springTransition = { type: "spring", stiffness: 85, damping: 16 };
 
 const fadeUp = {
@@ -134,7 +171,7 @@ function App() {
     setTimeout(() => setShowToast(false), 2500);
   };
 
-  const handleContactSubmit = (e) => {
+  const handleContactSubmit = async (e) => {
     e.preventDefault();
     if (!formName || !formPhone) {
       setToastMessage('Please enter your name and phone number!');
@@ -144,15 +181,40 @@ function App() {
     }
     
     setIsSubmitting(true);
-    // Simulate sending message
-    setTimeout(() => {
+    
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${contact.email}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: "New Lead from ChandraBud Marketing Card",
+          Name: formName,
+          Phone: formPhone,
+          Message: formMessage
+        })
+      });
+
+      const data = await response.json();
+      
+      if (response.ok && data.success === 'true') {
+        setSubmitSuccess(true);
+        setFormName('');
+        setFormPhone('');
+        setFormMessage('');
+      } else {
+        throw new Error(data.message || 'Submission failed');
+      }
+    } catch (err) {
+      console.error(err);
+      setToastMessage('Failed to send message. Please try again!');
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 3000);
+    } finally {
       setIsSubmitting(false);
-      setSubmitSuccess(true);
-      setFormName('');
-      setFormPhone('');
-      setFormMessage('');
-      setTimeout(() => setSubmitSuccess(false), 4000);
-    }, 1500);
+    }
   };
 
   const navigateLightbox = (direction) => {
@@ -198,13 +260,12 @@ function App() {
           <header id="home" className="relative p-6 sm:p-8 flex flex-col items-center text-center">
             {/* Top Studio Label */}
             <div className="w-full flex justify-between items-center mb-6">
-              <div className="flex flex-col items-start cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-                <div className="text-sm sm:text-base font-extrabold tracking-tighter flex items-center gap-0.5 leading-none">
-                  <span className="text-yellow-400">Chandrabud</span>
-                  <span className="text-white font-medium">Studio</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-yellow-400 to-emerald-400"></span>
-                </div>
-                <span className="text-[7px] text-zinc-500 uppercase tracking-widest leading-none mt-1 font-bold">Marketing + Technology</span>
+              <div className="cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                <img 
+                  src="/chandrabud-logo-removebg.png" 
+                  alt="ChandraBud Logo" 
+                  className="h-9 object-contain drop-shadow-[0_0_8px_rgba(234,179,8,0.2)]" 
+                />
               </div>
               
               <div className="px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-[9px] font-semibold uppercase tracking-widest text-zinc-400 flex items-center gap-1.5">
@@ -247,13 +308,13 @@ function App() {
                 </div>
               </motion.div>
 
-              {/* Center Logo text badge */}
-              <div className="relative text-center z-10 select-none">
-                <div className="text-lg font-bold tracking-tight text-white flex items-center justify-center gap-1">
-                  <Zap size={15} className="text-yellow-400 animate-bounce" />
-                  <span>Audits</span>
-                </div>
-                <div className="text-[7px] text-zinc-500 uppercase tracking-widest mt-0.5">Organic Search & SEO</div>
+              {/* Center Logo image badge */}
+              <div className="relative text-center z-10 select-none flex flex-col items-center">
+                <img 
+                  src="/chandrabud-logo-removebg.png" 
+                  alt="ChandraBud Logo" 
+                  className="w-16 h-16 object-contain drop-shadow-[0_0_12px_rgba(234,179,8,0.35)] animate-pulse" 
+                />
               </div>
             </div>
 
@@ -611,7 +672,7 @@ function App() {
 
             <div id="map" className="w-full h-44 rounded-2xl overflow-hidden border border-white/5 mb-5 shadow-inner">
               <iframe
-                title="Bhubaneswar Airport Square Location Map"
+                title="ChandraBud Location Map"
                 src={contact.mapEmbedUrl}
                 width="100%"
                 height="100%"
@@ -640,6 +701,12 @@ function App() {
                   {contact.email}
                 </a>
               </div>
+              {contact.workingHours && (
+                <div className="flex items-start gap-2.5">
+                  <Clock size={14} className="text-amber-400 shrink-0 mt-0.5" />
+                  <span>{contact.workingHours}</span>
+                </div>
+              )}
             </div>
 
             {/* Contact Form */}
@@ -682,19 +749,7 @@ function App() {
                 />
               </div>
 
-              {/* Status updates inside layout */}
-              <AnimatePresence>
-                {submitSuccess && (
-                  <motion.div 
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold text-center flex items-center justify-center gap-2"
-                  >
-                    <CheckCircle2 size={14} /> Message sent successfully! We will contact you soon.
-                  </motion.div>
-                )}
-              </AnimatePresence>
+
 
               <button
                 type="submit"
@@ -715,9 +770,35 @@ function App() {
             </form>
           </section>
 
-          {/* Footer watermark */}
-          <footer className="mt-8 pt-4 text-center text-[9px] text-zinc-600">
-            <p>&copy; {new Date().getFullYear()} Chandrabud Studio.</p>
+          {/* Footer watermark & social links */}
+          <footer className="mt-8 pt-6 pb-4 text-center border-t border-white/5">
+            {contact.socials && (
+              <div className="flex justify-center items-center gap-4 mb-4">
+                {contact.socials.facebook && (
+                  <a 
+                    href={contact.socials.facebook}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-8 h-8 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center text-zinc-400 hover:text-blue-500 hover:border-blue-500/20 hover:bg-blue-500/5 transition-all duration-300"
+                    title="Facebook Page"
+                  >
+                    <Facebook size={16} />
+                  </a>
+                )}
+                {contact.socials.instagram && (
+                  <a 
+                    href={contact.socials.instagram}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-8 h-8 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center text-zinc-400 hover:text-pink-500 hover:border-pink-500/20 hover:bg-pink-500/5 transition-all duration-300"
+                    title="Instagram Profile"
+                  >
+                    <Instagram size={16} />
+                  </a>
+                )}
+              </div>
+            )}
+            <p className="text-[9px] text-zinc-600">&copy; {new Date().getFullYear()} Chandrabud Studio.</p>
             <p className="tracking-widest uppercase text-[7px] font-bold mt-1 text-zinc-700">Digital Business Card</p>
           </footer>
 
@@ -910,6 +991,43 @@ function App() {
               </a>
             </div>
 
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {/* SUCCESS MODAL */}
+      <AnimatePresence>
+        {submitSuccess && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              transition={{ type: "spring", duration: 0.4 }}
+              className="w-full max-w-sm bg-[#0a0a0a] border border-white/10 rounded-3xl p-6 text-center shadow-[0_0_50px_rgba(16,185,129,0.15)] relative overflow-hidden"
+            >
+              {/* Gold & Emerald floating glows inside modal */}
+              <div className="absolute top-[-20%] left-[-20%] w-32 h-32 rounded-full bg-emerald-500/10 blur-[40px] pointer-events-none" />
+              <div className="absolute bottom-[-20%] right-[-20%] w-32 h-32 rounded-full bg-yellow-500/5 blur-[40px] pointer-events-none" />
+
+              <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mx-auto mb-4 shadow-[0_0_20px_rgba(16,185,129,0.15)]">
+                <CheckCircle2 size={32} className="animate-pulse" />
+              </div>
+              <h3 className="text-base font-extrabold text-white mb-2">Message Sent!</h3>
+              <p className="text-xs text-zinc-400 leading-relaxed font-light mb-6">
+                Thank you for reaching out. We have received your inquiry and our team will get in touch with you shortly.
+              </p>
+              <button
+                onClick={() => setSubmitSuccess(false)}
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-yellow-500 to-emerald-500 text-black text-xs font-black uppercase tracking-widest hover:scale-[1.02] transition-transform"
+              >
+                Okay, Got it
+              </button>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
