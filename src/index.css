@@ -158,3 +158,221 @@ html {
   @apply bg-yellow-500/10 border border-yellow-500/20 text-yellow-400;
 }
 
+/* --- Light Mode Styling Overrides --- */
+
+body.light {
+  background-color: #f1f5f9 !important; /* light slate background */
+  color: #1e293b !important; /* slate-800 text */
+}
+
+body.light ::-webkit-scrollbar-track {
+  background: #f1f5f9 !important;
+}
+
+body.light ::-webkit-scrollbar-thumb {
+  background: #cbd5e1 !important;
+  border-radius: 4px;
+}
+
+body.light ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8 !important;
+}
+
+.light.min-h-screen {
+  background-color: #f8fafc !important; /* light slate background */
+  color: #1e293b !important; /* slate-800 text */
+}
+
+.light .glass-capsule {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.06) !important;
+}
+
+.light .glass-card {
+  background-color: rgba(255, 255, 255, 0.75) !important;
+  border-color: rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04) !important;
+  color: #334155 !important;
+}
+
+.light h1,
+.light h2:not(.badge-emerald):not(.badge-cyan):not(.badge-gold):not(.text-yellow-400):not(.text-emerald-400):not(.text-cyan-400),
+.light h3:not(.text-yellow-400):not(.text-emerald-400):not(.text-cyan-400),
+.light h4:not(.text-yellow-400):not(.text-emerald-400):not(.text-cyan-400):not(.video-overlay-title),
+.light cite,
+.light .text-white {
+  color: #0f172a !important; /* slate-900 */
+}
+
+.light .text-zinc-400 {
+  color: #4b5563 !important; /* zinc-600 */
+}
+
+.light .text-zinc-300 {
+  color: #374151 !important; /* zinc-700 */
+}
+
+.light .text-zinc-500 {
+  color: #6b7280 !important; /* zinc-500 */
+}
+
+.light .text-zinc-600 {
+  color: #4b5563 !important;
+}
+
+.light .text-zinc-700 {
+  color: #374151 !important;
+}
+
+/* Badges */
+.light .badge-studio {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  color: #4b5563 !important;
+}
+
+/* Synergy Graphic container */
+.light .synergy-container {
+  border-color: rgba(0, 0, 0, 0.06) !important;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.01), transparent) !important;
+}
+
+.light .synergy-orbit-yellow {
+  background-color: #fef9c3 !important; /* yellow-100 */
+  border-color: rgba(234, 179, 8, 0.3) !important;
+  color: #ca8a04 !important; /* yellow-600 */
+}
+
+.light .synergy-orbit-emerald {
+  background-color: #dcfce7 !important; /* emerald-100 */
+  border-color: rgba(16, 185, 129, 0.3) !important;
+  color: #16a34a !important; /* emerald-600 */
+}
+
+/* Quick Action button overrides */
+.light .action-btn {
+  background-color: rgba(0, 0, 0, 0.02) !important;
+  border-color: rgba(0, 0, 0, 0.06) !important;
+}
+.light .action-btn:hover {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Dividers */
+.light .zigzag-divider {
+  background-image: linear-gradient(135deg, rgba(0,0,0,0.06) 25%, transparent 25%), 
+                    linear-gradient(225deg, rgba(0,0,0,0.06) 25%, transparent 25%) !important;
+}
+
+/* Stats Divider */
+.light .stats-row {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Showcase Case cards */
+.light .showcase-card {
+  border-color: rgba(0, 0, 0, 0.06) !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03) !important;
+}
+
+/* Videos Portfolio cards */
+.light .video-card {
+  border-color: rgba(0, 0, 0, 0.06) !important;
+  background-color: #f1f5f9 !important;
+}
+
+/* Review carousel arrow controls */
+.light .review-arrow {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  color: #4b5563 !important;
+}
+.light .review-arrow:hover {
+  color: #0f172a !important;
+  border-color: rgba(234, 179, 8, 0.4) !important;
+}
+
+.light .review-dot-inactive {
+  background-color: #cbd5e1 !important; /* slate-300 */
+}
+
+/* Google Maps map filter removal */
+.light .map-iframe {
+  filter: grayscale(10%) contrast(100%) !important;
+}
+
+/* Contact Form Input Fields */
+.light .form-input {
+  background-color: rgba(0, 0, 0, 0.02) !important;
+  border-color: rgba(0, 0, 0, 0.06) !important;
+  color: #1e293b !important;
+}
+.light .form-input:focus {
+  border-color: rgba(234, 179, 8, 0.45) !important;
+  background-color: #ffffff !important;
+}
+
+.light .form-label {
+  color: #4b5563 !important;
+}
+
+/* Form Submit Button */
+.light .form-submit-btn {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+}
+.light .form-submit-btn:hover {
+  background-color: #1e293b !important;
+}
+
+/* Footer elements */
+.light footer {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+.light .social-btn {
+  background-color: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(0, 0, 0, 0.06) !important;
+  color: #4b5563 !important;
+}
+.light .social-btn:hover {
+  background-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+.light .footer-watermark {
+  color: #9ca3af !important;
+}
+
+.light .footer-subtitle {
+  color: #9ca3af !important;
+}
+
+/* Bottom Navigation Bar sticky */
+.light .bottom-nav-container {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06) !important;
+}
+
+.light .bottom-nav-link {
+  color: #6b7280 !important;
+}
+.light .bottom-nav-link:hover,
+.light .bottom-nav-link-active {
+  color: #ca8a04 !important; /* yellow-600 */
+}
+
+/* Success modal styling override */
+.light .success-modal-content {
+  background-color: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1) !important;
+}
+
+.light .success-modal-content h3 {
+  color: #0f172a !important;
+}
+
+

@@ -5,7 +5,7 @@ import {
   BarChart2, Code2, Sparkles, Zap, Monitor, Shield, 
   Search, Award, Cpu, LineChart, Check, ArrowUpRight, PhoneCall, Menu, X,
   Share2, MapPin, Star, Play, ArrowLeft, Send, Users, Image as ImageIcon,
-  BookOpen, HelpCircle, Phone
+  BookOpen, HelpCircle, Phone, Sun, Moon
 } from 'lucide-react';
 import portfolioData from './data/portfolioData.json';
 
@@ -135,6 +135,24 @@ const ParticleBackground = () => {
 function App() {
   const { hero, about, services, showcase, instagramVideos, testimonials, contact } = portfolioData;
   
+  // Custom theme state
+  const [isLight, setIsLight] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') === 'light';
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    if (isLight) {
+      document.body.classList.add('light');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.body.classList.remove('light');
+      localStorage.setItem('theme', 'dark');
+    }
+  }, [isLight]);
+
   // Custom Reviews Carousel states
   const [reviewIndex, setReviewIndex] = useState(0);
   
@@ -226,7 +244,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#030303] text-[#ededed] overflow-x-hidden font-sans relative selection:bg-yellow-500/30 selection:text-white">
+    <div className={`min-h-screen ${isLight ? 'light' : ''} bg-[#030303] text-[#ededed] overflow-x-hidden font-sans relative selection:bg-yellow-500/30 selection:text-white`}>
       
       {/* Background Glows & Floating Particles */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
@@ -254,7 +272,7 @@ function App() {
         </AnimatePresence>
 
         {/* Outer glass capsule card */}
-        <div className="w-full bg-[#070707]/90 sm:border sm:border-white/10 sm:rounded-[2.5rem] shadow-[0_0_80px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col pb-24">
+        <div className="w-full bg-[#070707]/90 sm:border sm:border-white/10 sm:rounded-[2.5rem] shadow-[0_0_80px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col pb-24 glass-capsule">
           
           {/* Section 1: Hero Header Branding */}
           <header id="home" className="relative p-6 sm:p-8 flex flex-col items-center text-center">
@@ -268,14 +286,29 @@ function App() {
                 />
               </div>
               
-              <div className="px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-[9px] font-semibold uppercase tracking-widest text-zinc-400 flex items-center gap-1.5">
-                <Sparkles size={9} className="text-yellow-400 animate-pulse" />
-                <span>Visibility Agency</span>
+              <div className="flex items-center gap-2">
+                <div className="px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-[9px] font-semibold uppercase tracking-widest text-zinc-400 flex items-center gap-1.5 badge-studio">
+                  <Sparkles size={9} className="text-yellow-400 animate-pulse" />
+                  <span>Visibility Agency</span>
+                </div>
+
+                {/* Theme Toggle Button */}
+                <button
+                  onClick={() => setIsLight(!isLight)}
+                  className="p-2 rounded-full bg-white/[0.04] border border-white/10 text-zinc-400 hover:text-yellow-400 transition-all badge-studio flex items-center justify-center cursor-pointer"
+                  title={isLight ? "Switch to Dark Mode" : "Switch to Light Mode"}
+                >
+                  {isLight ? (
+                    <Moon size={11} className="text-zinc-600" />
+                  ) : (
+                    <Sun size={11} className="text-yellow-400 animate-pulse" />
+                  )}
+                </button>
               </div>
             </div>
 
             {/* Rotating Synergy Graphics */}
-            <div className="relative w-full max-w-[280px] aspect-square rounded-3xl border border-white/5 bg-gradient-to-b from-white/[0.01] to-transparent p-6 flex items-center justify-center overflow-hidden mb-6 sm:mb-8 mx-auto shadow-inner">
+            <div className="relative w-full max-w-[280px] aspect-square rounded-3xl border border-white/5 bg-gradient-to-b from-white/[0.01] to-transparent p-6 flex items-center justify-center overflow-hidden mb-6 sm:mb-8 mx-auto shadow-inner synergy-container">
               <div className="absolute inset-0 bg-radial-gradient from-white/[0.02] to-transparent pointer-events-none" />
               
               <div className="absolute w-20 h-20 rounded-full bg-gradient-to-tr from-yellow-500/20 via-teal-500/10 to-emerald-500/20 blur-xl animate-pulse-glow" />
@@ -286,10 +319,10 @@ function App() {
                 transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
                 className="absolute w-40 h-40 rounded-full border border-yellow-500/10 border-dashed flex items-center justify-center"
               >
-                <div className="absolute -top-2 w-6 h-6 rounded-lg bg-yellow-950 border border-yellow-500/30 flex items-center justify-center text-yellow-400 shadow-[0_0_12px_rgba(234,179,8,0.3)]">
+                <div className="absolute -top-2 w-6 h-6 rounded-lg bg-yellow-950 border border-yellow-500/30 flex items-center justify-center text-yellow-400 shadow-[0_0_12px_rgba(234,179,8,0.3)] synergy-orbit-yellow">
                   <LineChart size={11} />
                 </div>
-                <div className="absolute -bottom-2 w-6 h-6 rounded-lg bg-yellow-950 border border-yellow-500/30 flex items-center justify-center text-yellow-400 shadow-[0_0_12px_rgba(234,179,8,0.3)]">
+                <div className="absolute -bottom-2 w-6 h-6 rounded-lg bg-yellow-950 border border-yellow-500/30 flex items-center justify-center text-yellow-400 shadow-[0_0_12px_rgba(234,179,8,0.3)] synergy-orbit-yellow">
                   <Search size={11} />
                 </div>
               </motion.div>
@@ -300,10 +333,10 @@ function App() {
                 transition={{ repeat: Infinity, duration: 16, ease: "linear" }}
                 className="absolute w-28 h-28 rounded-full border border-emerald-500/10 flex items-center justify-center"
               >
-                <div className="absolute -left-2 w-6 h-6 rounded-lg bg-emerald-950 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.3)]">
+                <div className="absolute -left-2 w-6 h-6 rounded-lg bg-emerald-950 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.3)] synergy-orbit-emerald">
                   <Code2 size={11} />
                 </div>
-                <div className="absolute -right-2 w-6 h-6 rounded-lg bg-emerald-950 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.3)]">
+                <div className="absolute -right-2 w-6 h-6 rounded-lg bg-emerald-950 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.3)] synergy-orbit-emerald">
                   <Cpu size={11} />
                 </div>
               </motion.div>
@@ -361,7 +394,7 @@ function App() {
               
               <a 
                 href={`tel:${contact.phone}`}
-                className="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-yellow-500/20 hover:bg-yellow-500/5 transition-all group"
+                className="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-yellow-500/20 hover:bg-yellow-500/5 transition-all group action-btn"
                 title="Call Now"
               >
                 <div className="w-10 h-10 rounded-full bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-yellow-400 group-hover:scale-110 transition-transform mb-1.5">
@@ -374,7 +407,7 @@ function App() {
                 href={`https://wa.me/${contact.whatsapp}`}
                 target="_blank"
                 rel="noreferrer"
-                className="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-emerald-500/20 hover:bg-emerald-500/5 transition-all group"
+                className="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-emerald-500/20 hover:bg-emerald-500/5 transition-all group action-btn"
                 title="WhatsApp"
               >
                 <div className="w-10 h-10 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform mb-1.5">
@@ -385,7 +418,7 @@ function App() {
 
               <a 
                 href="#map"
-                className="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-cyan-500/20 hover:bg-cyan-500/5 transition-all group"
+                className="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-cyan-500/20 hover:bg-cyan-500/5 transition-all group action-btn"
                 title="Directions"
               >
                 <div className="w-10 h-10 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform mb-1.5">
@@ -396,7 +429,7 @@ function App() {
 
               <a 
                 href={`mailto:${contact.email}`}
-                className="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-yellow-500/20 hover:bg-yellow-500/5 transition-all group"
+                className="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-yellow-500/20 hover:bg-yellow-500/5 transition-all group action-btn"
                 title="Email Us"
               >
                 <div className="w-10 h-10 rounded-full bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-yellow-400 group-hover:scale-110 transition-transform mb-1.5">
@@ -407,7 +440,7 @@ function App() {
 
               <button 
                 onClick={handleShare}
-                className="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-purple-500/20 hover:bg-purple-500/5 transition-all group"
+                className="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-purple-500/20 hover:bg-purple-500/5 transition-all group action-btn"
                 title="Share Profile"
               >
                 <div className="w-10 h-10 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform mb-1.5">
@@ -431,7 +464,7 @@ function App() {
               </p>
 
               {/* Statistics row */}
-              <div className="grid grid-cols-3 gap-3 border-t border-white/5 pt-4 text-center">
+              <div className="grid grid-cols-3 gap-3 border-t border-white/5 pt-4 text-center stats-row">
                 <div>
                   <div className="text-sm font-black text-white">{about.experience}</div>
                   <div className="text-[8px] text-zinc-500 uppercase tracking-wider font-semibold mt-0.5">Experience</div>
@@ -499,7 +532,7 @@ function App() {
               {showcase.map((item, idx) => (
                 <div
                   key={idx}
-                  className="group cursor-pointer rounded-2xl border border-white/5 bg-[#0b0b0b] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-yellow-500/20"
+                  className="group cursor-pointer rounded-2xl border border-white/5 bg-[#0b0b0b] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-yellow-500/20 showcase-card"
                   onClick={() => {
                     setSelectedImage(item);
                     setSelectedImageIndex(idx);
@@ -537,7 +570,7 @@ function App() {
                 <div 
                   key={idx}
                   onClick={() => setSelectedVideo(vid)}
-                  className="relative aspect-[9/16] rounded-xl overflow-hidden cursor-pointer border border-white/5 bg-zinc-900 group hover:border-yellow-500/30 transition-all flex flex-col justify-end p-2"
+                  className="relative aspect-[9/16] rounded-xl overflow-hidden cursor-pointer border border-white/5 bg-zinc-900 group hover:border-yellow-500/30 transition-all flex flex-col justify-end p-2 video-card"
                 >
                   {/* Background thumbnail */}
                   <img 
@@ -570,7 +603,7 @@ function App() {
 
                   {/* Visual Title text */}
                   <div className="relative z-10 text-left">
-                    <h4 className="text-[8px] font-extrabold text-zinc-100 group-hover:text-yellow-400 transition-colors line-clamp-2 leading-tight leading-[1.1]">
+                    <h4 className="text-[8px] font-extrabold text-zinc-100 group-hover:text-yellow-400 transition-colors line-clamp-2 leading-tight leading-[1.1] video-overlay-title">
                       {vid.title}
                     </h4>
                   </div>
@@ -634,7 +667,7 @@ function App() {
               <div className="flex items-center gap-3 mt-2">
                 <button 
                   onClick={() => setReviewIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
-                  className="p-1 rounded-full bg-white/5 border border-white/10 hover:border-yellow-500/20 text-zinc-400 hover:text-white transition-colors"
+                  className="p-1 rounded-full bg-white/5 border border-white/10 hover:border-yellow-500/20 text-zinc-400 hover:text-white transition-colors review-arrow"
                 >
                   <ChevronRight size={12} className="rotate-180" />
                 </button>
@@ -645,7 +678,7 @@ function App() {
                       key={i}
                       onClick={() => setReviewIndex(i)}
                       className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                        reviewIndex === i ? 'bg-yellow-500 w-3' : 'bg-zinc-700'
+                        reviewIndex === i ? 'bg-yellow-500 w-3' : 'bg-zinc-700 review-dot-inactive'
                       }`}
                     />
                   ))}
@@ -653,7 +686,7 @@ function App() {
 
                 <button 
                   onClick={() => setReviewIndex((prev) => (prev + 1) % testimonials.length)}
-                  className="p-1 rounded-full bg-white/5 border border-white/10 hover:border-yellow-500/20 text-zinc-400 hover:text-white transition-colors"
+                  className="p-1 rounded-full bg-white/5 border border-white/10 hover:border-yellow-500/20 text-zinc-400 hover:text-white transition-colors review-arrow"
                 >
                   <ChevronRight size={12} />
                 </button>
@@ -677,6 +710,7 @@ function App() {
                 width="100%"
                 height="100%"
                 style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) grayscale(25%) contrast(110%)' }}
+                className="map-iframe"
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
@@ -712,40 +746,40 @@ function App() {
             {/* Contact Form */}
             <form onSubmit={handleContactSubmit} className="space-y-3.5 text-left">
               <div className="space-y-1">
-                <label htmlFor="name-input" className="text-[9px] uppercase tracking-wider text-zinc-500 font-bold">Your Name</label>
+                <label htmlFor="name-input" className="text-[9px] uppercase tracking-wider text-zinc-500 font-bold form-label">Your Name</label>
                 <input
                   id="name-input"
                   type="text"
                   placeholder="Enter name"
                   value={formName}
                   onChange={(e) => setFormName(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl bg-white/[0.02] border border-white/5 focus:border-yellow-500/30 text-xs focus:outline-none transition-all"
+                  className="w-full px-4 py-2.5 rounded-xl bg-white/[0.02] border border-white/5 focus:border-yellow-500/30 text-xs focus:outline-none transition-all form-input"
                   required
                 />
               </div>
 
               <div className="space-y-1">
-                <label htmlFor="phone-input" className="text-[9px] uppercase tracking-wider text-zinc-500 font-bold">Phone Number</label>
+                <label htmlFor="phone-input" className="text-[9px] uppercase tracking-wider text-zinc-500 font-bold form-label">Phone Number</label>
                 <input
                   id="phone-input"
                   type="tel"
                   placeholder="Enter number"
                   value={formPhone}
                   onChange={(e) => setFormPhone(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl bg-white/[0.02] border border-white/5 focus:border-yellow-500/30 text-xs focus:outline-none transition-all"
+                  className="w-full px-4 py-2.5 rounded-xl bg-white/[0.02] border border-white/5 focus:border-yellow-500/30 text-xs focus:outline-none transition-all form-input"
                   required
                 />
               </div>
 
               <div className="space-y-1">
-                <label htmlFor="message-input" className="text-[9px] uppercase tracking-wider text-zinc-500 font-bold">Message Details</label>
+                <label htmlFor="message-input" className="text-[9px] uppercase tracking-wider text-zinc-500 font-bold form-label">Message Details</label>
                 <textarea
                   id="message-input"
                   rows="3"
                   placeholder="Tell us about your project"
                   value={formMessage}
                   onChange={(e) => setFormMessage(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl bg-white/[0.02] border border-white/5 focus:border-yellow-500/30 text-xs focus:outline-none transition-all resize-none"
+                  className="w-full px-4 py-2.5 rounded-xl bg-white/[0.02] border border-white/5 focus:border-yellow-500/30 text-xs focus:outline-none transition-all resize-none form-input"
                 />
               </div>
 
@@ -754,7 +788,7 @@ function App() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3 rounded-xl bg-white text-black text-xs font-extrabold hover:bg-zinc-200 transition-colors uppercase tracking-widest flex items-center justify-center gap-1.5 disabled:opacity-50"
+                className="w-full py-3 rounded-xl bg-white text-black text-xs font-extrabold hover:bg-zinc-200 transition-colors uppercase tracking-widest flex items-center justify-center gap-1.5 disabled:opacity-50 form-submit-btn"
               >
                 {isSubmitting ? (
                   <>
@@ -779,7 +813,7 @@ function App() {
                     href={contact.socials.facebook}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-8 h-8 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center text-zinc-400 hover:text-blue-500 hover:border-blue-500/20 hover:bg-blue-500/5 transition-all duration-300"
+                    className="w-8 h-8 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center text-zinc-400 hover:text-blue-500 hover:border-blue-500/20 hover:bg-blue-500/5 transition-all duration-300 social-btn"
                     title="Facebook Page"
                   >
                     <Facebook size={16} />
@@ -790,7 +824,7 @@ function App() {
                     href={contact.socials.instagram}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-8 h-8 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center text-zinc-400 hover:text-pink-500 hover:border-pink-500/20 hover:bg-pink-500/5 transition-all duration-300"
+                    className="w-8 h-8 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center text-zinc-400 hover:text-pink-500 hover:border-pink-500/20 hover:bg-pink-500/5 transition-all duration-300 social-btn"
                     title="Instagram Profile"
                   >
                     <Instagram size={16} />
@@ -798,19 +832,19 @@ function App() {
                 )}
               </div>
             )}
-            <p className="text-[9px] text-zinc-600">&copy; {new Date().getFullYear()} Chandrabud Studio.</p>
-            <p className="tracking-widest uppercase text-[7px] font-bold mt-1 text-zinc-700">Digital Business Card</p>
+            <p className="text-[9px] text-zinc-600 footer-watermark">&copy; {new Date().getFullYear()} Chandrabud Studio.</p>
+            <p className="tracking-widest uppercase text-[7px] font-bold mt-1 text-zinc-700 footer-subtitle">Digital Business Card</p>
           </footer>
 
         </div>
 
         {/* Section 9: Fixed Bottom Navigation Bar */}
         <div className="fixed bottom-4 left-4 right-4 z-40 max-w-lg mx-auto pointer-events-auto">
-          <nav className="rounded-full border border-white/10 bg-[#070707]/90 backdrop-blur-2xl px-4 py-2 shadow-[0_-10px_35px_rgba(0,0,0,0.8)] flex justify-between items-center gap-1">
+          <nav className="rounded-full border border-white/10 bg-[#070707]/90 backdrop-blur-2xl px-4 py-2 shadow-[0_-10px_35px_rgba(0,0,0,0.8)] flex justify-between items-center gap-1 bottom-nav-container">
             
             <a 
               href="#home"
-              className="flex flex-col items-center justify-center flex-1 py-1 rounded-full text-zinc-400 hover:text-yellow-400 transition-all font-bold group"
+              className="flex flex-col items-center justify-center flex-1 py-1 rounded-full text-zinc-400 hover:text-yellow-400 transition-all font-bold group bottom-nav-link"
             >
               <Zap size={15} className="group-hover:scale-115 transition-transform" />
               <span className="text-[7px] uppercase mt-0.5 tracking-wider">Home</span>
@@ -818,7 +852,7 @@ function App() {
 
             <a 
               href="#about"
-              className="flex flex-col items-center justify-center flex-1 py-1 rounded-full text-zinc-400 hover:text-yellow-400 transition-all font-bold group"
+              className="flex flex-col items-center justify-center flex-1 py-1 rounded-full text-zinc-400 hover:text-yellow-400 transition-all font-bold group bottom-nav-link"
             >
               <Users size={15} className="group-hover:scale-115 transition-transform" />
               <span className="text-[7px] uppercase mt-0.5 tracking-wider">About</span>
@@ -826,7 +860,7 @@ function App() {
 
             <a 
               href="#services"
-              className="flex flex-col items-center justify-center flex-1 py-1 rounded-full text-zinc-400 hover:text-yellow-400 transition-all font-bold group"
+              className="flex flex-col items-center justify-center flex-1 py-1 rounded-full text-zinc-400 hover:text-yellow-400 transition-all font-bold group bottom-nav-link"
             >
               <Cpu size={15} className="group-hover:scale-115 transition-transform" />
               <span className="text-[7px] uppercase mt-0.5 tracking-wider">Services</span>
@@ -834,7 +868,7 @@ function App() {
 
             <a 
               href="#gallery"
-              className="flex flex-col items-center justify-center flex-1 py-1 rounded-full text-zinc-400 hover:text-yellow-400 transition-all font-bold group"
+              className="flex flex-col items-center justify-center flex-1 py-1 rounded-full text-zinc-400 hover:text-yellow-400 transition-all font-bold group bottom-nav-link"
             >
               <ImageIcon size={15} className="group-hover:scale-115 transition-transform" />
               <span className="text-[7px] uppercase mt-0.5 tracking-wider">Gallery</span>
@@ -842,7 +876,7 @@ function App() {
 
             <a 
               href="#videos"
-              className="flex flex-col items-center justify-center flex-1 py-1 rounded-full text-zinc-400 hover:text-yellow-400 transition-all font-bold group"
+              className="flex flex-col items-center justify-center flex-1 py-1 rounded-full text-zinc-400 hover:text-yellow-400 transition-all font-bold group bottom-nav-link"
             >
               <Play size={15} className="group-hover:scale-115 transition-transform" />
               <span className="text-[7px] uppercase mt-0.5 tracking-wider">Videos</span>
@@ -850,7 +884,7 @@ function App() {
 
             <a 
               href="#contact"
-              className="flex flex-col items-center justify-center flex-1 py-1 rounded-full text-zinc-400 hover:text-yellow-400 transition-all font-bold group"
+              className="flex flex-col items-center justify-center flex-1 py-1 rounded-full text-zinc-400 hover:text-yellow-400 transition-all font-bold group bottom-nav-link"
             >
               <Mail size={15} className="group-hover:scale-115 transition-transform" />
               <span className="text-[7px] uppercase mt-0.5 tracking-wider">Contact</span>
@@ -1008,7 +1042,7 @@ function App() {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
               transition={{ type: "spring", duration: 0.4 }}
-              className="w-full max-w-sm bg-[#0a0a0a] border border-white/10 rounded-3xl p-6 text-center shadow-[0_0_50px_rgba(16,185,129,0.15)] relative overflow-hidden"
+              className="w-full max-w-sm bg-[#0a0a0a] border border-white/10 rounded-3xl p-6 text-center shadow-[0_0_50px_rgba(16,185,129,0.15)] relative overflow-hidden success-modal-content"
             >
               {/* Gold & Emerald floating glows inside modal */}
               <div className="absolute top-[-20%] left-[-20%] w-32 h-32 rounded-full bg-emerald-500/10 blur-[40px] pointer-events-none" />
