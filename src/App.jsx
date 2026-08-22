@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  ChevronRight, CheckCircle2, ArrowRight, Mail, MessageCircle, 
-  BarChart2, Code2, Sparkles, Zap, Monitor, Shield, 
+import {
+  ChevronRight, CheckCircle2, ArrowRight, Mail, MessageCircle,
+  BarChart2, Code2, Sparkles, Zap, Monitor, Shield,
   Search, Award, Cpu, LineChart, Check, ArrowUpRight, PhoneCall, Menu, X,
   Share2, MapPin, Star, Play, ArrowLeft, Send, Users, Image as ImageIcon,
   BookOpen, HelpCircle, Phone, Sun, Moon
@@ -94,7 +94,7 @@ const ParticleBackground = () => {
         const leftPosition = Math.random() * 100;
         const delay = Math.random() * 8;
         const duration = Math.random() * 15 + 13;
-        
+
         // 3 floating colors: Emerald, Gold, Cyan
         const randVal = Math.random();
         let colorClass = 'bg-emerald-400/30 shadow-[0_0_10px_rgba(52,211,153,0.4)]';
@@ -103,7 +103,7 @@ const ParticleBackground = () => {
         } else if (randVal > 0.33) {
           colorClass = 'bg-cyan-400/30 shadow-[0_0_10px_rgba(34,211,238,0.4)]';
         }
-        
+
         return (
           <motion.div
             key={i}
@@ -134,7 +134,10 @@ const ParticleBackground = () => {
 
 function App() {
   const { hero, about, services, showcase, instagramVideos, testimonials, contact } = portfolioData;
-  
+
+  const [liveRating, setLiveRating] = useState(4.7);
+  const [liveReviewsCount, setLiveReviewsCount] = useState(about.reviewsCount || '11 Google Reviews');
+
   // Custom theme state
   const [isLight, setIsLight] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -155,7 +158,7 @@ function App() {
 
   // Custom Reviews Carousel states
   const [reviewIndex, setReviewIndex] = useState(0);
-  
+
   // Lightbox modal states (for the Showcase Gallery)
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -182,6 +185,43 @@ function App() {
     return () => clearInterval(timer);
   }, [testimonials.length]);
 
+  // Real-time Google Reviews and Rating Sync from Maps Embed
+  useEffect(() => {
+    const fetchLiveStats = async () => {
+      const embedUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3676.886130285356!2d86.228104!3d22.843702!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f5e334001a47d3%3A0xdcc28a798f0b7a65!2sChandraBud!5e0!3m2!1sen!2sin!4v1783250282134!5m2!1sen!2sin`;
+      const proxies = [
+        `https://api.allorigins.win/raw?url=${encodeURIComponent(embedUrl)}`,
+        `https://corsproxy.io/?${encodeURIComponent(embedUrl)}`
+      ];
+
+      for (const proxyUrl of proxies) {
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 6000); // 6s timeout per request
+
+          const res = await fetch(proxyUrl, { signal: controller.signal });
+          clearTimeout(timeoutId);
+
+          if (!res.ok) continue;
+          const text = await res.text();
+          if (text && text.includes('ChandraBud')) {
+            const match = text.match(/([3-5]\.\d+),\"(\d+)\s+reviews\"/);
+            if (match) {
+              const r = parseFloat(match[1]).toFixed(1);
+              const c = `${match[2]} Google Reviews`;
+              setLiveRating(parseFloat(r));
+              setLiveReviewsCount(c);
+              break;
+            }
+          }
+        } catch (e) {
+          console.warn(`Failed to sync reviews with proxy ${proxyUrl}:`, e);
+        }
+      }
+    };
+    fetchLiveStats();
+  }, []);
+
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href);
     setToastMessage('Link copied to clipboard!');
@@ -197,9 +237,9 @@ function App() {
       setTimeout(() => setShowToast(false), 2500);
       return;
     }
-    
+
     setIsSubmitting(true);
-    
+
     try {
       const response = await fetch(`https://formsubmit.co/ajax/${contact.email}`, {
         method: 'POST',
@@ -216,7 +256,7 @@ function App() {
       });
 
       const data = await response.json();
-      
+
       if (response.ok && data.success === 'true') {
         setSubmitSuccess(true);
         setFormName('');
@@ -245,7 +285,7 @@ function App() {
 
   return (
     <div className={`min-h-screen ${isLight ? 'light' : ''} bg-[#030303] text-[#ededed] overflow-x-hidden font-sans relative selection:bg-yellow-500/30 selection:text-white`}>
-      
+
       {/* Background Glows & Floating Particles */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-15%] w-[45vw] h-[45vw] rounded-full bg-emerald-500/5 blur-[160px] animate-pulse-glow" />
@@ -255,7 +295,7 @@ function App() {
 
       {/* Main Container: Mobile Visicard Frame Centered on Desktop */}
       <div className="relative z-10 max-w-2xl mx-auto px-0 sm:px-4 py-0 sm:py-8 min-h-screen flex flex-col justify-between">
-        
+
         {/* Floating Custom Toast */}
         <AnimatePresence>
           {showToast && (
@@ -273,19 +313,19 @@ function App() {
 
         {/* Outer glass capsule card */}
         <div className="w-full bg-[#070707]/90 sm:border sm:border-white/10 sm:rounded-[2.5rem] shadow-[0_0_80px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col pb-24 glass-capsule">
-          
+
           {/* Section 1: Hero Header Branding */}
           <header id="home" className="relative p-6 sm:p-8 flex flex-col items-center text-center">
             {/* Top Studio Label */}
             <div className="w-full flex justify-between items-center mb-6">
               <div className="cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-                <img 
-                  src="/chandrabud-logo-removebg.png" 
-                  alt="ChandraBud Logo" 
-                  className="h-9 object-contain drop-shadow-[0_0_8px_rgba(234,179,8,0.2)]" 
+                <img
+                  src="/chandrabud-logo-removebg.png"
+                  alt="ChandraBud Logo"
+                  className="h-9 object-contain drop-shadow-[0_0_8px_rgba(234,179,8,0.2)]"
                 />
               </div>
-              
+
               <div className="flex items-center gap-2">
                 <div className="px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-[9px] font-semibold uppercase tracking-widest text-zinc-400 flex items-center gap-1.5 badge-studio">
                   <Sparkles size={9} className="text-yellow-400 animate-pulse" />
@@ -310,11 +350,11 @@ function App() {
             {/* Rotating Synergy Graphics */}
             <div className="relative w-full max-w-[280px] aspect-square rounded-3xl border border-white/5 bg-gradient-to-b from-white/[0.01] to-transparent p-6 flex items-center justify-center overflow-hidden mb-6 sm:mb-8 mx-auto shadow-inner synergy-container">
               <div className="absolute inset-0 bg-radial-gradient from-white/[0.02] to-transparent pointer-events-none" />
-              
+
               <div className="absolute w-20 h-20 rounded-full bg-gradient-to-tr from-yellow-500/20 via-teal-500/10 to-emerald-500/20 blur-xl animate-pulse-glow" />
-              
+
               {/* Spinning Orbit 1: Marketing */}
-              <motion.div 
+              <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
                 className="absolute w-40 h-40 rounded-full border border-yellow-500/10 border-dashed flex items-center justify-center"
@@ -328,7 +368,7 @@ function App() {
               </motion.div>
 
               {/* Spinning Orbit 2: Development */}
-              <motion.div 
+              <motion.div
                 animate={{ rotate: -360 }}
                 transition={{ repeat: Infinity, duration: 16, ease: "linear" }}
                 className="absolute w-28 h-28 rounded-full border border-emerald-500/10 flex items-center justify-center"
@@ -343,16 +383,16 @@ function App() {
 
               {/* Center Logo image badge */}
               <div className="relative text-center z-10 select-none flex flex-col items-center">
-                <img 
-                  src="/chandrabud-logo-removebg.png" 
-                  alt="ChandraBud Logo" 
-                  className="w-16 h-16 object-contain drop-shadow-[0_0_12px_rgba(234,179,8,0.35)] animate-pulse" 
+                <img
+                  src="/chandrabud-logo-removebg.png"
+                  alt="ChandraBud Logo"
+                  className="w-16 h-16 object-contain drop-shadow-[0_0_12px_rgba(234,179,8,0.35)] animate-pulse"
                 />
               </div>
             </div>
 
             {/* Headline and descriptions */}
-            <motion.h1 
+            <motion.h1
               initial="hidden"
               animate="visible"
               variants={fadeUp}
@@ -360,7 +400,7 @@ function App() {
             >
               Google <span className="gradient-text-gold">Local SEO</span> & Organic <span className="gradient-text-emerald">Keyword Indexing</span>
             </motion.h1>
-            
+
             <motion.p
               initial="hidden"
               animate="visible"
@@ -376,7 +416,7 @@ function App() {
               variants={fadeUp}
               className="flex justify-center w-full"
             >
-              <a 
+              <a
                 href={hero.ctaLink}
                 className="px-6 py-3 rounded-full bg-gradient-to-r from-yellow-500 to-emerald-500 text-black text-xs font-bold hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(234,179,8,0.2)] flex items-center gap-1.5"
               >
@@ -391,8 +431,8 @@ function App() {
           {/* Section 2: Quick Action Bar (Call, WhatsApp, Maps Direction, Email, Share Profile) */}
           <section className="px-6 py-2">
             <div className="grid grid-cols-5 gap-2 text-center">
-              
-              <a 
+
+              <a
                 href={`tel:${contact.phone}`}
                 className="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-yellow-500/20 hover:bg-yellow-500/5 transition-all group action-btn"
                 title="Call Now"
@@ -403,7 +443,7 @@ function App() {
                 <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-wider">Call</span>
               </a>
 
-              <a 
+              <a
                 href={`https://wa.me/${contact.whatsapp}`}
                 target="_blank"
                 rel="noreferrer"
@@ -416,7 +456,7 @@ function App() {
                 <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-wider">WhatsApp</span>
               </a>
 
-              <a 
+              <a
                 href="#map"
                 className="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-cyan-500/20 hover:bg-cyan-500/5 transition-all group action-btn"
                 title="Directions"
@@ -427,7 +467,7 @@ function App() {
                 <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-wider">Direction</span>
               </a>
 
-              <a 
+              <a
                 href={`mailto:${contact.email}`}
                 className="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-yellow-500/20 hover:bg-yellow-500/5 transition-all group action-btn"
                 title="Email Us"
@@ -438,7 +478,7 @@ function App() {
                 <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-wider">Email</span>
               </a>
 
-              <button 
+              <button
                 onClick={handleShare}
                 className="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-purple-500/20 hover:bg-purple-500/5 transition-all group action-btn"
                 title="Share Profile"
@@ -456,9 +496,9 @@ function App() {
           <section id="about" className="px-6 py-4 scroll-mt-6">
             <div className="glass-card p-5 sm:p-6 rounded-3xl border border-white/5 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-yellow-500/5 filter blur-[35px] pointer-events-none" />
-              
+
               <h2 className="text-xs font-bold uppercase tracking-widest text-yellow-400 mb-2">Our Profile</h2>
-              <h3 className="text-xl font-bold tracking-tight text-white mb-3">About Chandrabud Studio</h3>
+              <h3 className="text-xl font-bold tracking-tight text-white mb-3">About Chandrabud Digital</h3>
               <p className="text-xs text-zinc-400 leading-relaxed font-light mb-5">
                 {about.bio}
               </p>
@@ -476,9 +516,9 @@ function App() {
                 <div>
                   <div className="text-sm font-black text-emerald-400 flex items-center justify-center gap-0.5">
                     <Star size={10} className="fill-yellow-400 text-yellow-400" />
-                    <span>4.9/5</span>
+                    <span>{liveRating}/5</span>
                   </div>
-                  <div className="text-[8px] text-zinc-500 uppercase tracking-wider font-semibold mt-0.5">{about.reviewsCount}</div>
+                  <div className="text-[8px] text-zinc-500 uppercase tracking-wider font-semibold mt-0.5">{liveReviewsCount}</div>
                 </div>
               </div>
             </div>
@@ -491,9 +531,9 @@ function App() {
           <section id="services" className="px-6 py-4 scroll-mt-6">
             <h2 className="text-xs font-bold uppercase tracking-widest text-yellow-400 text-center mb-1">Our Services</h2>
             <h3 className="text-lg font-bold text-white text-center mb-5">SEO & Search Visibility Focus</h3>
-            
+
             <div className="space-y-4">
-              
+
               {/* Marketing Services block */}
               <div className="glass-card p-4 rounded-2xl border border-white/5 relative overflow-hidden">
                 <div className="flex items-center gap-2.5 mb-3">
@@ -539,10 +579,10 @@ function App() {
                   }}
                 >
                   <div className="relative aspect-video overflow-hidden">
-                    <img 
-                      src={item.image} 
+                    <img
+                      src={item.image}
                       alt={item.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                       <ImageIcon size={18} className="text-yellow-400" />
@@ -567,18 +607,18 @@ function App() {
 
             <div className="grid grid-cols-3 gap-2.5">
               {instagramVideos.map((vid, idx) => (
-                <div 
+                <div
                   key={idx}
                   onClick={() => setSelectedVideo(vid)}
                   className="relative aspect-[9/16] rounded-xl overflow-hidden cursor-pointer border border-white/5 bg-zinc-900 group hover:border-yellow-500/30 transition-all flex flex-col justify-end p-2 video-card"
                 >
                   {/* Background thumbnail */}
-                  <img 
-                    src={vid.thumbnail} 
-                    alt={vid.title} 
+                  <img
+                    src={vid.thumbnail}
+                    alt={vid.title}
                     className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-85 transition-opacity duration-300"
                   />
-                  
+
                   {/* Shadow overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none" />
 
@@ -618,13 +658,13 @@ function App() {
           {/* Section 7: Google Reviews carousel */}
           <section className="px-6 py-4 relative">
             <div className="flex flex-col items-center text-center">
-              
+
               {/* Google Header */}
               <div className="flex items-center gap-1.5 justify-center mb-3">
-                <img 
-                  src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" 
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
                   alt="Google logo"
-                  className="w-4 h-4" 
+                  className="w-4 h-4"
                 />
                 <span className="text-[10px] font-black uppercase tracking-wider text-white">Review us on Google</span>
               </div>
@@ -650,7 +690,7 @@ function App() {
                     <p className="text-xs text-zinc-300 leading-relaxed font-light italic">
                       "{testimonials[reviewIndex].quote}"
                     </p>
-                    
+
                     <div>
                       <cite className="not-italic text-[10px] font-black text-white block">
                         {testimonials[reviewIndex].author}
@@ -665,7 +705,7 @@ function App() {
 
               {/* Carousel Indicators & Arrows */}
               <div className="flex items-center gap-3 mt-2">
-                <button 
+                <button
                   onClick={() => setReviewIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
                   className="p-1 rounded-full bg-white/5 border border-white/10 hover:border-yellow-500/20 text-zinc-400 hover:text-white transition-colors review-arrow"
                 >
@@ -677,14 +717,13 @@ function App() {
                     <button
                       key={i}
                       onClick={() => setReviewIndex(i)}
-                      className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                        reviewIndex === i ? 'bg-yellow-500 w-3' : 'bg-zinc-700 review-dot-inactive'
-                      }`}
+                      className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${reviewIndex === i ? 'bg-yellow-500 w-3' : 'bg-zinc-700 review-dot-inactive'
+                        }`}
                     />
                   ))}
                 </div>
 
-                <button 
+                <button
                   onClick={() => setReviewIndex((prev) => (prev + 1) % testimonials.length)}
                   className="p-1 rounded-full bg-white/5 border border-white/10 hover:border-yellow-500/20 text-zinc-400 hover:text-white transition-colors review-arrow"
                 >
@@ -809,7 +848,7 @@ function App() {
             {contact.socials && (
               <div className="flex justify-center items-center gap-4 mb-4">
                 {contact.socials.facebook && (
-                  <a 
+                  <a
                     href={contact.socials.facebook}
                     target="_blank"
                     rel="noreferrer"
@@ -820,7 +859,7 @@ function App() {
                   </a>
                 )}
                 {contact.socials.instagram && (
-                  <a 
+                  <a
                     href={contact.socials.instagram}
                     target="_blank"
                     rel="noreferrer"
@@ -832,7 +871,7 @@ function App() {
                 )}
               </div>
             )}
-            <p className="text-[9px] text-zinc-600 footer-watermark">&copy; {new Date().getFullYear()} Chandrabud Studio.</p>
+            <p className="text-[9px] text-zinc-600 footer-watermark">&copy; {new Date().getFullYear()} Chandrabud Digital.</p>
             <p className="tracking-widest uppercase text-[7px] font-bold mt-1 text-zinc-700 footer-subtitle">Digital Business Card</p>
           </footer>
 
@@ -841,8 +880,8 @@ function App() {
         {/* Section 9: Fixed Bottom Navigation Bar */}
         <div className="fixed bottom-4 left-4 right-4 z-40 max-w-lg mx-auto pointer-events-auto">
           <nav className="rounded-full border border-white/10 bg-[#070707]/90 backdrop-blur-2xl px-4 py-2 shadow-[0_-10px_35px_rgba(0,0,0,0.8)] flex justify-between items-center gap-1 bottom-nav-container">
-            
-            <a 
+
+            <a
               href="#home"
               className="flex flex-col items-center justify-center flex-1 py-1 rounded-full text-zinc-400 hover:text-yellow-400 transition-all font-bold group bottom-nav-link"
             >
@@ -850,7 +889,7 @@ function App() {
               <span className="text-[7px] uppercase mt-0.5 tracking-wider">Home</span>
             </a>
 
-            <a 
+            <a
               href="#about"
               className="flex flex-col items-center justify-center flex-1 py-1 rounded-full text-zinc-400 hover:text-yellow-400 transition-all font-bold group bottom-nav-link"
             >
@@ -858,7 +897,7 @@ function App() {
               <span className="text-[7px] uppercase mt-0.5 tracking-wider">About</span>
             </a>
 
-            <a 
+            <a
               href="#services"
               className="flex flex-col items-center justify-center flex-1 py-1 rounded-full text-zinc-400 hover:text-yellow-400 transition-all font-bold group bottom-nav-link"
             >
@@ -866,7 +905,7 @@ function App() {
               <span className="text-[7px] uppercase mt-0.5 tracking-wider">Services</span>
             </a>
 
-            <a 
+            <a
               href="#gallery"
               className="flex flex-col items-center justify-center flex-1 py-1 rounded-full text-zinc-400 hover:text-yellow-400 transition-all font-bold group bottom-nav-link"
             >
@@ -874,7 +913,7 @@ function App() {
               <span className="text-[7px] uppercase mt-0.5 tracking-wider">Gallery</span>
             </a>
 
-            <a 
+            <a
               href="#videos"
               className="flex flex-col items-center justify-center flex-1 py-1 rounded-full text-zinc-400 hover:text-yellow-400 transition-all font-bold group bottom-nav-link"
             >
@@ -882,7 +921,7 @@ function App() {
               <span className="text-[7px] uppercase mt-0.5 tracking-wider">Videos</span>
             </a>
 
-            <a 
+            <a
               href="#contact"
               className="flex flex-col items-center justify-center flex-1 py-1 rounded-full text-zinc-400 hover:text-yellow-400 transition-all font-bold group bottom-nav-link"
             >
@@ -906,19 +945,19 @@ function App() {
           >
             {/* Top Bar inside modal */}
             <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-10">
-              <button 
+              <button
                 onClick={() => setSelectedImage(null)}
                 className="p-2.5 rounded-full bg-white/5 border border-white/10 hover:border-yellow-500/20 text-zinc-400 hover:text-white transition-colors"
                 title="Go Back"
               >
                 <ArrowLeft size={16} />
               </button>
-              
+
               <div className="text-[10px] text-zinc-500 uppercase tracking-widest font-black">
                 {selectedImageIndex + 1} / {showcase.length}
               </div>
 
-              <button 
+              <button
                 onClick={() => setSelectedImage(null)}
                 className="p-2.5 rounded-full bg-white/5 border border-white/10 hover:border-yellow-500/20 text-zinc-400 hover:text-white transition-colors"
                 title="Close"
@@ -929,9 +968,9 @@ function App() {
 
             {/* Central content frame */}
             <div className="w-full max-w-4xl relative flex items-center justify-center px-8">
-              
+
               {/* Left Navigate Trigger */}
-              <button 
+              <button
                 onClick={() => navigateLightbox(-1)}
                 className="absolute left-0 p-2.5 rounded-full bg-white/5 border border-white/10 hover:border-yellow-500/20 text-zinc-400 hover:text-white transition-colors"
               >
@@ -949,7 +988,7 @@ function App() {
                   alt={selectedImage.title}
                   className="max-h-[60vh] max-w-full rounded-2xl object-contain border border-white/10 mx-auto"
                 />
-                
+
                 <div className="max-w-md mx-auto text-center space-y-1 px-4">
                   <h4 className="text-sm font-extrabold text-white">{selectedImage.title}</h4>
                   <p className="text-xs text-zinc-400 leading-relaxed font-light">{selectedImage.desc}</p>
@@ -957,7 +996,7 @@ function App() {
               </div>
 
               {/* Right Navigate Trigger */}
-              <button 
+              <button
                 onClick={() => navigateLightbox(1)}
                 className="absolute right-0 p-2.5 rounded-full bg-white/5 border border-white/10 hover:border-yellow-500/20 text-zinc-400 hover:text-white transition-colors"
               >
@@ -983,7 +1022,7 @@ function App() {
               <span className="text-[10px] font-black uppercase tracking-widest text-yellow-400 flex items-center gap-1.5">
                 <Instagram size={12} className="text-pink-500" /> Instagram Campaign
               </span>
-              <button 
+              <button
                 onClick={() => setSelectedVideo(null)}
                 className="p-2 rounded-full bg-white/5 border border-white/10 hover:border-yellow-500/20 text-zinc-400 hover:text-white transition-colors"
                 title="Close"
@@ -1006,7 +1045,7 @@ function App() {
                 className="border-0"
               />
             </div>
-            
+
             {/* Modal Bottom Actions */}
             <div className="w-full max-w-sm text-center mt-4 space-y-3.5 px-2">
               <div>
