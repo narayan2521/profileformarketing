@@ -141,9 +141,10 @@ function App() {
   // Custom theme state
   const [isLight, setIsLight] = useState(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('theme') === 'light';
+      const stored = localStorage.getItem('theme');
+      return stored ? stored === 'light' : true;
     }
-    return false;
+    return true;
   });
 
   useEffect(() => {
